@@ -11,6 +11,11 @@ from contextlib import asynccontextmanager
 import random
 from pydantic import BaseModel
 
+import whisper
+
+print("Loading Whisper model...")
+whisper_model = whisper.load_model("base")
+
 class SearchRequest(BaseModel):
     query: str
 
@@ -64,23 +69,22 @@ async def upload_video(file: UploadFile = File(...)):
 
         video_id = video.id  # <-- STORE ID HERE
 
-        segment_duration = 10
-        total_duration = 60
-        start = 0
+        # Transcribe audio
+        print("Transcribing...")
+        result = whisper_model.transcribe(str(file_path))
 
-        while start < total_duration:
+        for seg in result["segments"]:
             segment = Segment(
-                video_id=video.id,
-                start_time=start,
-                end_time=start + segment_duration,
-                transcript_text=f"Dummy transcript from {start} to {start + segment_duration}"
+                video_id=video_id,
+                start_time=seg["start"],
+                end_time=seg["end"],
+                transcript_text=seg["text"].strip()
             )
             session.add(segment)
-            start += segment_duration
 
         session.commit()
 
-                # Fetch segments for this video
+        # Fetch segments for this video
         segments = session.query(Segment).filter_by(video_id=video_id).all()
 
         for seg in segments:
