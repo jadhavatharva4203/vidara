@@ -1,11 +1,17 @@
 import whisper
 
-print("Loading model...")
+print("Loading Whisper model...")
 model = whisper.load_model("base")
 
-print("Transcribing...")
+print("Transcribing sample.mp3...")
 result = model.transcribe("sample.mp3")
 
-print("\n--- TRANSCRIPT ---\n")
+print("\n--- TRANSCRIPT SEGMENTS ---\n")
 for segment in result["segments"]:
-    print(segment)
+    print(
+        {
+            "start": segment["start"],
+            "end": segment["end"],
+            "text": segment["text"].strip(),
+        }
+    )

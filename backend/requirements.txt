@@ -8,3 +8,7 @@ psycopg[binary]==3.2.4
 
 qdrant-client==1.12.1
 python-multipart==0.0.20
+
+openai-whisper==20240930
+sentence-transformers==3.4.1
+torch==2.6.0

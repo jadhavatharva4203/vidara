@@ -4,6 +4,7 @@ from app.models import Base
 
 engine = create_engine(settings.postgres_url, pool_pre_ping=True)
 
+
 def ping_postgres():
     with engine.connect() as conn:
         conn.execute(text("SELECT 1"))
