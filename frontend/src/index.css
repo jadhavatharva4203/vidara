@@ -28,13 +28,20 @@ button {
 }
 
 .app-shell {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 32px 20px 48px;
 }
 
 .hero {
   margin-bottom: 28px;
+}
+
+.hero-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .hero h1 {
@@ -48,10 +55,28 @@ button {
   max-width: 760px;
 }
 
+.user-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
 }
 
 .card {
@@ -75,7 +100,9 @@ button {
 }
 
 input[type="file"],
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+input[type="password"] {
   width: 100%;
   padding: 12px 14px;
   background: #0d1522;
@@ -85,7 +112,7 @@ input[type="text"] {
   outline: none;
 }
 
-input[type="text"]::placeholder {
+input::placeholder {
   color: #7b8ca3;
 }
 
@@ -103,6 +130,14 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.link-button {
+  background: transparent;
+  color: #93c5fd;
+  padding: 0;
+  border: none;
+  font-weight: 600;
+}
+
 .status-message {
   margin-top: 14px;
   color: #93c5fd;
@@ -114,14 +149,16 @@ button:disabled {
 }
 
 .video-list,
-.results-list {
+.results-list,
+.transcript-list {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
 .video-item,
-.result-item {
+.result-item,
+.transcript-item {
   border: 1px solid #334155;
   border-radius: 12px;
   padding: 14px;
@@ -137,9 +174,17 @@ button:disabled {
   font-size: 0.9rem;
   color: #94a3b8;
   word-break: break-word;
+  margin-bottom: 10px;
 }
 
-.results-card {
+.video-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.results-card,
+.transcript-card {
   min-height: 280px;
 }
 
@@ -179,7 +224,8 @@ button:disabled {
     grid-template-columns: 1fr 1fr;
   }
 
-  .results-card {
+  .results-card,
+  .transcript-card {
     grid-column: 1 / -1;
   }
 }
